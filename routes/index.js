@@ -12,18 +12,51 @@ var DECADES = [
     2010
 ];
 
+var GENRES = {
+    'music' : {
+        'yle': "Musiikki",
+        'svt': "Musik"
+    },
+    'sport': {
+        'yle': "Urheilu",
+        'svt': "Sport" 
+    },
+    'news': {
+        'yle': "Uutiset",
+        'svt': "Nyheter"
+    },
+    'food': {
+        'yle': "Ruoka",
+        'svt': "Mat"
+    },
+    'horror': {
+        'yle': "Jännitys",
+        'svt': "Sp%C3%A4nning"
+    },
+    'random': {
+        'yle': "Yleisradio",
+        'svt': "Kungligt"
+    }
+};
 
 var yleGenre = "Musiikki",
     svtGenre = "Musik",
-    //yleApi = "http://haku.yle.fi/api/search?category=elavaarkisto&keyword=" + yleGenre + "&media=video&sort=relevancy&page=1&UILanguage=fi&decade=",
     yleApi = "http://localhost:3000/archive",
     svtApi = "http://www.svt.se/oppet-arkiv-api/search/tags/?genreFacet=" + svtGenre + "&pretty=true&yearFacet=";
 
 router.get('/', function(req, res, next) {
 
+    var genre = req.query.genre || "music";
+
+    // override default
+    yleGenre = GENRES[genre].yle;
+    svtGenre = GENRES[genre].svt;
+    svtApi = "http://www.svt.se/oppet-arkiv-api/search/tags/?genreFacet=" + svtGenre + "&pretty=true&yearFacet=";
+
+
     async.map(DECADES, fetch, function(err, results) {
         var decades = parse(results);
-        res.render("index", { decades: decades });
+        res.render("index", { genre: genre, decades: decades });
     });
 });
 
@@ -62,7 +95,6 @@ var parse = function (data) {
     var decades = [];
 
     for (i in data) {
-        console.log("FOOO",i)
         var decade = data[i];
         decades.push( { decade: DECADES[i], yle: parseYle(decade[0]), svt: parseSvt(decade[1]) })
     }

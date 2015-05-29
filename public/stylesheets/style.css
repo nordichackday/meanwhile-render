@@ -47,8 +47,13 @@ table {
     border-spacing: 0;
 }
 
+
+
+
 .hide { display: none; }
 body { background-color: #fff; color: #999;}
+header { }
+
 section { clear: both; }
 div { float: left; width: 720px; display: block; }
 video, .yle_areena_player { width: 720px; }
@@ -59,9 +64,12 @@ li { list-style-type: none; }
 nav { z-index: 99999999; font-size: 2em; text-align: center; color: #fff; display: block; width: 100%;}
 
 nav#genre { font-size: 1.2em; margin-top: 100px; text-align: center; }
-nav#genre a { padding: 20px; color: #999; text-decoration: none;}
-nav#genre a.active { background-color: #ededed; padding: 20px; color: #fff;}
+nav#genre a { padding: 20px; color: #999; text-decoration: none; display: inline-block; height: 1em}
+nav#genre a.active { background-color: #ededed; padding: 10px 20px; color: #111; border-radius: 20px; }
 
 nav#country { position: fixed; top:0;  font-size: 2em; color: #999; background-color: #fff; padding: 1em;}
-nav#country li { display: inline-block; float: left; width:50%;}
+nav#country li { display: inline-block; float: left; width:20%;}
+.yle .yle_areena_player.video .player-play-icon-video-wrapper .player-play-icon-video {margin-left: -306px;}
+.yle .elava-arkisto-embed div.top-right-first-aired { display: none; }
 
+.wrapper { background-color: #000; width:100%;}
