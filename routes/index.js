@@ -91,6 +91,14 @@ var parseSvt = function(data) {
         var obj = {},
         program = data.entries[i];
 
+        for (var v in program.videoReferences) {
+            var video = program.videoReferences[v];
+            if (video.playerType == 'ios') {
+                obj.stream = video.url;
+                break;
+            }
+        }
+
         obj.title = program.programTitle;
         obj.image = program.thumbnailXL;
         obj.id = program.id;
