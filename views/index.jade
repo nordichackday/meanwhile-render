@@ -7,15 +7,15 @@ block content
 
     each decade in decades
         section
-            h1 #{decade.decade}
+            h1 #{decade.decade}'s
             div(class="yle") 
                 ul
                 each program, i in decade.yle
-                    li(class="img-container #{(i>0 ? 'hide' : '')}")
-                        img(src="#{program.image}")
-                        
+                    li(class="img-container #{(i>4 ? 'hide' : '')}")
+                        if program.mediaId != null
+                            div(class="yle_areena_player" data-id="#{program.mediaId}" data-article="#{program.url}")
             div(class="svt")
                 ul
                 each program, i in decade.svt
-                    li(class="img-container #{(i>0 ? 'hide' : '')}")
+                    li(class="img-container #{(i>4 ? 'hide' : '')}")
                         img(src="#{program.image}")

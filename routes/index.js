@@ -3,27 +3,25 @@ var express = require('express'),
     request = require("request"),
     async = require("async");
 
+var DECADES = [
+    1960,
+    1970,
+    1980,
+    1990,
+    2000,
+    2010
+];
+
+
 var yleGenre = "Musiikki",
     svtGenre = "Musik",
-    yleApi = "http://haku.yle.fi/api/search?category=elavaarkisto&keyword=" + yleGenre + "&media=video&sort=relevancy&page=1&UILanguage=fi&decade=",
+    //yleApi = "http://haku.yle.fi/api/search?category=elavaarkisto&keyword=" + yleGenre + "&media=video&sort=relevancy&page=1&UILanguage=fi&decade=",
+    yleApi = "http://localhost:3000/archive",
     svtApi = "http://www.svt.se/oppet-arkiv-api/search/tags/?genreFacet=" + svtGenre + "&pretty=true&yearFacet=";
 
 router.get('/', function(req, res, next) {
-    
-    var decades = [
-        1920,
-        1930,
-        1940,
-        1950,
-        1960,
-        1970,
-        1980,
-        1990,
-        2000,
-        2010
-    ];
 
-    async.map(decades, fetch, function(err, results) {
+    async.map(DECADES, fetch, function(err, results) {
         var decades = parse(results);
         res.render("index", { decades: decades });
     });
@@ -52,7 +50,7 @@ var fetchData = function(url, callback) {
 var params = function(service, decade) {
     decade = parseInt(decade);
     if (service == "yle") {
-        return  decade + "%2F" + (decade + 9);
+        return  "/" + decade + "/" + yleGenre
     } else {
         var param = [];
         for (var i = 0; i < 10; i++) { param.push(decade + i)}
@@ -64,20 +62,23 @@ var parse = function (data) {
     var decades = [];
 
     for (i in data) {
+        console.log("FOOO",i)
         var decade = data[i];
-        decades.push({ decade: decade[1].tagQueryList[0].name, yle: parseYle(decade[0]), svt: parseSvt(decade[1]) })
+        decades.push( { decade: DECADES[i], yle: parseYle(decade[0]), svt: parseSvt(decade[1]) })
     }
     return decades;
 };
 
 var parseYle = function(data) {
     var programs = [];
-    for(var i in data.results) {
+    for(var i in data.newresult) {
         var obj = {},
-        program = data.results[i];
+        program = data.newresult[i];
 
         obj.title = program.title;
         obj.image = program.image.replace("h_116,w_235", "h_348,w_705");
+        obj.url = program.url;
+        obj.mediaId = program.mediaId;
         obj.id = program.articleId;
         programs.push(obj);
     }
