@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    each decade in decades
+        section
+            h1 #{decade.decade}
+            div(class="yle") 
+                ul
+                    li(class="img-container")
+                        img(src="#{decade.yle[0].image}")
+                        //each program in decade.yle
+            div(class="svt")
+                if decade.svt[0]
+                    ul
+                    //each program in decade.svt
+                    li(class="img-container")
+                        img(src="#{decade.svt[0].image}")
