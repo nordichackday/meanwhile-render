@@ -47,10 +47,12 @@ table {
     border-spacing: 0;
 }
 
-
+.hide { display: none; }
 body { background-color: #222; }
 section { clear: both; }
-div { float: left; width: 50%;}
-li { list-style-type: none}
+div { float: left; width: 50%; display: block; }
 div img { width: 100%; margin:0; padding: 0; }
 h1 { text-align: center; font-size: 3em; color: #cdcdcd;}
+
+nav { font-size: 5em; text-align: center; position: fixed; top:0; color: #fff; display: block; width: 100%;}
+nav li { display: inline-block; float: left; width: 50%}

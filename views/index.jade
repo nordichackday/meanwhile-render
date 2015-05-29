@@ -1,17 +1,21 @@
 extends layout
 
 block content
+    nav
+        li Yle
+        li SVT
+
     each decade in decades
         section
             h1 #{decade.decade}
             div(class="yle") 
                 ul
-                    li(class="img-container")
-                        img(src="#{decade.yle[0].image}")
-                        //each program in decade.yle
+                each program, i in decade.yle
+                    li(class="img-container #{(i>0 ? 'hide' : '')}")
+                        img(src="#{program.image}")
+                        
             div(class="svt")
-                if decade.svt[0]
-                    ul
-                    //each program in decade.svt
-                    li(class="img-container")
-                        img(src="#{decade.svt[0].image}")
+                ul
+                each program, i in decade.svt
+                    li(class="img-container #{(i>0 ? 'hide' : '')}")
+                        img(src="#{program.image}")
