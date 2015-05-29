@@ -48,7 +48,7 @@ table {
 }
 
 .hide { display: none; }
-body { background-color: #222; }
+body { background-color: #fff; color: #999;}
 section { clear: both; }
 div { float: left; width: 720px; display: block; }
 video, .yle_areena_player { width: 720px; }
@@ -56,5 +56,12 @@ div img { width: 100%; margin:0; padding: 0; }
 h1 { text-align: center; font-size: 3em; color: #999; background-color: #fff; font-family: Georgia; padding: 100px;}
 li { list-style-type: none; }
 
-nav { z-index: 99999999; font-size: 5em; text-align: center; position: fixed; top:0; color: #fff; display: block; width: 100%;}
-nav li { display: inline-block; float: left; width: 50%}
+nav { z-index: 99999999; font-size: 2em; text-align: center; color: #fff; display: block; width: 100%;}
+
+nav#genre { font-size: 1.2em; margin-top: 100px; text-align: center; }
+nav#genre a { padding: 20px; color: #999; text-decoration: none;}
+nav#genre a.active { background-color: #ededed; padding: 20px; color: #fff;}
+
+nav#country { position: fixed; top:0;  font-size: 2em; color: #999; background-color: #fff; padding: 1em;}
+nav#country li { display: inline-block; float: left; width:50%;}
+

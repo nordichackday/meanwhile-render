@@ -1,9 +1,18 @@
 extends layout
 
 block content
-    nav
-        li Yle
-        li SVT
+
+    nav#country
+        li Suomi
+        li Sverige
+
+    nav#genre
+        a(href="/music") Music 
+        a(href="/sport") Sport 
+        a(href="/news") News 
+        a(href="/food") Food 
+        a(href="/horror") Horror
+        a(href="/random") Random
 
     each decade in decades
         section
